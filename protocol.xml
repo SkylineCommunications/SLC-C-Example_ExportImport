@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+****************************************************************************
+*  Copyright (c) 2023,  Skyline Communications NV  All Rights Reserved.    *
+****************************************************************************
+
+By using this driver, you expressly agree with the usage terms and
+conditions set out below.
+This driver and all related materials are protected by copyrights and
+other intellectual property rights that exclusively belong
+to Skyline Communications.
+
+A user license granted for this driver is strictly for personal use only.
+This driver may not be used in any way by anyone without the prior
+written consent of Skyline Communications. Any sublicensing of this
+driver is forbidden.
+
+Any modifications to this driver by the user are only allowed for
+personal use and within the intended purpose of the driver,
+and will remain the sole responsibility of the user.
+Skyline Communications will not be responsible for any damages or
+malfunctions whatsoever of the driver resulting from a modification
+or adaptation by the user.
+
+The content of this driver is confidential information.
+The user hereby agrees to keep this confidential information strictly
+secret and confidential and not to disclose or reveal it, in whole
+or in part, directly or indirectly to any person, entity, organization
+or administration without the prior written consent of
+Skyline Communications.
+
+Any inquiries can be addressed to:
+
+	Skyline Communications NV
+	Ambachtenstraat 33
+	B-8870 Izegem
+	Belgium
+	Tel.	: +32 51 31 35 69
+	Fax.	: +32 51 31 01 29
+	E-mail	: info@skyline.be
+	Web		: www.skyline.be
+	Contact	: Ben Vandenberghe
+
+-->
+
+<Protocol xmlns="http://www.skyline.be/protocol">
+	<Name>SLC SDF ExportImport</Name>
+	<Description>SLC SDF ExportImport DataMiner driver</Description>
+	<Version>1.0.0.1</Version>
+	<IntegrationID>DMS-DRV-1234</IntegrationID>
+	<Provider>Skyline Communications</Provider>
+	<Vendor>Skyline</Vendor>
+	<VendorOID>1.3.6.1.4.1.8813.2.0</VendorOID>
+	<DeviceOID>0</DeviceOID>
+	<ElementType>Example</ElementType>
+	<Type relativeTimers="true">virtual</Type>
+	<Display defaultPage="General" pageOrder="General" wideColumnPages="General"/>
+	<SNMP includepages="true">auto</SNMP>
+	
+	<Compliancies>
+		<CassandraReady>true</CassandraReady>
+		<MinimumRequiredVersion>10.0.10.0 - 9454</MinimumRequiredVersion>
+	</Compliancies>
+	
+	<Params>
+		<Param id="2">
+			<Name>AfterStartup</Name>
+			<Description>After Startup</Description>
+			<Type>dummy</Type>
+		</Param>
+		<Param id="10" trending="false" save="true">
+			<Name>FileLocation</Name>
+			<Description>File Location</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>File Location. File will always have the name 'Data'.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>C:\\Skyline DataMiner\\Documents</DefaultValue>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="11" setter="true">
+			<Name>FileLocation</Name>
+			<Description>File Location</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="20">
+			<Name>ExportToFile</Name>
+			<Type>write</Type>
+			<Information>
+				<Subtext>Export to File.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="150">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Export to CSV</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Export to XML</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Export to JSON</Display>
+						<Value>2</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="21">
+			<Name>ImportFromFile</Name>
+			<Type>write</Type>
+			<Information>
+				<Subtext>Import from File.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="150">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Import From CSV</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Import From XML</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Import From JSON</Display>
+						<Value>2</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="990">
+			<Name>Data_ContextMenu</Name>
+			<Description>Context Menu for Data</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet dependencyValues="1001;1002;1003">
+						<Display>Add item...</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet options="table:singleselection" dependencyValues="1001;1002:[value:1002];1003:[value:1003]">
+						<Display>Duplicate item...</Display>
+						<Value>2</Value>
+					</Discreet>
+					<Discreet options="separator">
+						<Display>Separator 1</Display>
+						<Value>-1</Value>
+					</Discreet>
+					<Discreet options="table:singleselection" dependencyValues="1002:[value:1002];1003:[value:1003]">
+						<Display>Edit item...</Display>
+						<Value>10</Value>
+					</Discreet>
+					<Discreet options="separator">
+						<Display>Separator 2</Display>
+						<Value>-2</Value>
+					</Discreet>
+					<Discreet options="table:selection;confirm:The selected item(s) will be deleted permanently.">
+						<Display>Delete selected item(s)</Display>
+						<Value>20</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1000">
+			<Name>Data</Name>
+			<Description>Data</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0" options=";volatile">
+				<ColumnOption idx="0" pid="1001" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="1002" type="retrieved" options="" />
+				<ColumnOption idx="2" pid="1003" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Data</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:1001|0-1002|1-1003|2,width:100-100-100,sort:STRING-STRING-INT,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="1001" trending="false">
+			<Name>Data_Index</Name>
+			<Description>Index (Data)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1002" trending="false">
+			<Name>Data_Name</Name>
+			<Description>Name (Data)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Name</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1003" trending="false">
+			<Name>Data_Number</Name>
+			<Description>Number (Data)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Number</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>100</High>
+				</Range>
+				<Units>%</Units>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+	</Params>
+	
+	<QActions>
+		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
+		<QAction id="3" name="Export/Import" encoding="csharp" triggers="20;21" entryPoint="Export;Import" />
+		<QAction id="990" name="Data - ContextMenu" encoding="csharp" triggers="990" />
+	</QActions>
+	
+	<Groups>
+		<Group id="2">
+			<Name>After Startup</Name>
+			<Description>After Startup</Description>
+			<Type>poll action</Type>
+			<Content>
+				<Action>2</Action>
+			</Content>
+		</Group>
+	</Groups>
+
+	<Triggers>
+		<Trigger id="1">
+			<Name>After Startup</Name>
+			<On>protocol</On>
+			<Time>after startup</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>1</Id>
+			</Content>
+		</Trigger>
+	</Triggers>
+
+	<Actions>
+		<Action id="1">
+			<Name>After Startup Group</Name>
+			<On id="2">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="2">
+			<Name>After Startup QAction</Name>
+			<On id="2">parameter</On>
+			<Type>run actions</Type>
+		</Action>
+	</Actions>
+
+	<Timers>
+	</Timers>
+
+	<VersionHistory>
+		<Branches>
+			<Branch id="1">
+				<Comment>Main Branch</Comment>
+				<SystemVersions>
+					<SystemVersion id="0">
+						<MajorVersions>
+							<MajorVersion id="0">
+								<MinorVersions>
+									<MinorVersion id="1">
+										<Date>2023-02-15</Date>
+										<Provider>
+											<Author>MOD</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<NewFeature>Initial version</NewFeature>
+										</Changes>
+									</MinorVersion>
+								</MinorVersions>
+							</MajorVersion>
+						</MajorVersions>
+					</SystemVersion>
+				</SystemVersions>
+			</Branch>
+		</Branches>
+	</VersionHistory>
+
+</Protocol>
