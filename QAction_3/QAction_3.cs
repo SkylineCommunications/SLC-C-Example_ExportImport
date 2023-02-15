@@ -72,7 +72,7 @@ public static class QAction
 			});
 
 		int value = Convert.ToInt32(parameters[0]);
-		string extension = "unknown";
+		string extension;
 		switch (value)
 		{
 			case 0:
@@ -85,6 +85,10 @@ public static class QAction
 
 			case 2:
 				extension = "json";
+				break;
+
+			default:
+				extension = "unknown";
 				break;
 		}
 
@@ -174,18 +178,46 @@ public static class QAction
 	/// <summary>
 	/// Example of having a CSV that doesn't need/has header names. Then it can be done based on position.
 	/// </summary>
-	private class CsvDataRowBasedOnPositions
+	public class CsvDataRowBasedOnPositions
 	{
+		/// <summary>
+		/// Gets or sets an index.
+		/// </summary>
 		[CsvHeader(0)]
 		public string Index { get; set; }
 
+		/// <summary>
+		/// Gets or sets a name.
+		/// </summary>
 		[CsvHeader(1)]
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Gets or sets a number.
+		/// </summary>
 		[CsvHeader(2)]
-		public string Number { get; set; }
+		public int Number { get; set; }
 
+		/// <summary>
+		/// Gets or sets an unrelated property.
+		/// Unrelated property that we don't want in our exported file.
+		/// Will be empty when importing.
+		/// </summary>
 		[CsvIgnore]
 		public string UnrelatedProperty { get; set; }
+
+		/// <summary>
+		/// Convert the DataRow to an object array.
+		/// </summary>
+		/// <returns>Object array containing the values from the DataRow.</returns>
+		public object[] ToRow()
+		{
+			return new DataQActionRow
+			{
+				Data_index = Index,
+				Data_name = Name,
+				Data_number = Number,
+			};
+		}
 	}
 }
