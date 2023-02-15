@@ -392,6 +392,9 @@ Any inquiries can be addressed to:
 										<Changes>
 											<NewFeature>Initial version</NewFeature>
 										</Changes>
+										<References>
+											<TaskId>203495</TaskId>
+										</References>
 									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
