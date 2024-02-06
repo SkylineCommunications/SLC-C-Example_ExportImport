@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol">
-      <Version>10.2.0.25</Version>
+      <Version>10.4.2.3</Version>
     </PackageReference>
     <PackageReference Include="Skyline.DataMiner.Utils.Table.ContextMenu">
       <Version>1.0.0.1</Version>
