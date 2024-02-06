@@ -46,7 +46,7 @@ Any inquiries can be addressed to:
 
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Skyline Example Export Import</Name>
-	<Description>SLC SDF ExportImport DataMiner driver</Description>
+	<Description>SLC Example ExportImport DataMiner connector</Description>
 	<Version>1.0.0.1</Version>
 	<IntegrationID>DMS-DRV-9026</IntegrationID>
 	<Provider>Skyline Communications</Provider>
@@ -60,7 +60,7 @@ Any inquiries can be addressed to:
 	
 	<Compliancies>
 		<CassandraReady>true</CassandraReady>
-		<MinimumRequiredVersion>10.0.10.0 - 9454</MinimumRequiredVersion>
+		<MinimumRequiredVersion>10.2.0.0 - 11517</MinimumRequiredVersion>
 	</Compliancies>
 	
 	<Params>
